@@ -1,0 +1,3 @@
+-- CS 513 Team 117 - Profiling and integrity-constraint queries
+-- Paste all SQL/Datalog used to profile D and D', and to check ICs before vs. after cleaning.
+-- Keep before/after pairs together and label which dataset (D or D') each ran against.

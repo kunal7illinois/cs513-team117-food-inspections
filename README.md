@@ -1,0 +1,58 @@
+# CS 513 - Team 117 - Chicago Food Inspections
+
+Phase-II data cleaning project for CS 513 (Summer 2026), UIUC.
+
+**Team:** Kunal Sinha (kunal7@illinois.edu), Che-Min Lin (cheminl2@illinois.edu), Zehra Khan (zehraak2@illinois.edu)
+
+**Dataset:** Chicago Food Inspections (CFI), snapshot `Food-Inspections-20251023.csv`, from
+[data.cityofchicago.org](https://data.cityofchicago.org/Health-Human-Services/Food-Inspections/4ijn-s7e5/about_data),
+via the course [Box link](https://uofi.box.com/s/vns80mmodwj66fj5l30cu31xdgnzcbac).
+
+**Target use case (U1):** Which violations drive failures, by facility type and ZIP, over time?
+See the Phase-I report for full details on U1/U0/U2 and the four documented data quality problems.
+
+## Getting the data
+
+The raw CSV (~313MB) is **not** in this repo - it's too large for GitHub and the assignment asks
+us to link data via Box rather than commit it. Download it from the Box link above and drop it in
+`Chicago-Food-Inspection/` locally (that path is gitignored). The raw + cleaned datasets we
+produce will be uploaded to a Box folder and linked in `DataLinks.txt` before final submission.
+
+## Repo layout
+
+This mirrors the file contract from our Phase-I plan (Section 4): each person reads only the raw
+CSV and writes to their own output file, so work stays independent until the final join.
+
+```
+scripts/
+  violations/          Kunal  - parse pipe-delimited Violations field, remap pre/post 07/01/2018 codes
+                                 -> violation_finding_clean.csv
+  facility_type_city/  Zehra  - OpenRefine clustering for Facility Type + City -> two lookup tables
+  license_results/     Che-Min - resolve License #=0, bucket Results into true outcomes
+                                 -> license_fix.csv, results_bucketed.csv
+  join/                Kunal  - joins the four outputs above into D' (single SQLite script)
+
+openrefine/            OpenRefine operation history, exported as OpenRefineHistory.json
+queries/               queries.txt - SQL used to profile D and check ICs before/after cleaning
+workflow/              Workflow diagram(s) for the outer (W1) and inner/OpenRefine (W2) workflows
+DataLinks.txt          Box links to raw + cleaned datasets (fill in before final submission)
+```
+
+## Plan / timeline (from Phase-I report, Section 4)
+
+| Step | Description | Owner(s) | Target |
+|---|---|---|---|
+| S1 | Review/update U1 + dataset description | All | 07/15 |
+| S2 | Profile D to confirm the 4 DQ problems | Kunal (Violations), Zehra (Facility Type/City), Che-Min (License #/Results) | 07/18 |
+| S3 | Clean each problem independently | Kunal, Zehra, Che-Min; Kunal joins | 07/22 clean, 07/23 join |
+| S4 | Before/after checks, re-run Q1/Q2 on D' | Kunal, Zehra, Che-Min | 07/26 |
+| S5 | Document + quantify changes | All; Kunal compiles | 07/29 |
+
+## Submission checklist (Phase-II)
+
+- [ ] Phase-II report PDF (workflow description, before/after IC checks, change summary, conclusions)
+- [ ] Workflow model (`workflow/`)
+- [ ] OpenRefine operation history (`openrefine/OpenRefineHistory.json`)
+- [ ] Other scripts / provenance (`scripts/`)
+- [ ] Queries (`queries/queries.txt`)
+- [ ] `DataLinks.txt` with Box links to raw + cleaned data

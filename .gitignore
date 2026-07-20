@@ -1,0 +1,17 @@
+# Raw dataset - 313MB, exceeds GitHub's 100MB file limit anyway.
+# Get it from Box instead (see DataLinks.txt).
+/Chicago-Food-Inspection/
+
+# Generic data dump folder, if anyone creates one - review before committing
+# anything here manually if it's small enough to matter (<50MB).
+/data/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# OpenRefine local backups (not the exported history JSON - that's tracked)
+*.openrefine-backup/

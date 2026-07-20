@@ -1,0 +1,8 @@
+CS 513 Team 117 - Chicago Food Inspections - Data Links
+
+Original ("dirty") dataset:
+  Course-provided raw file (Food-Inspections-20251023.csv), from Box:
+  https://uofi.box.com/s/vns80mmodwj66fj5l30cu31xdgnzcbac
+
+Cleaned dataset (D'):
+  TODO - upload cleaned CSV(s) to a Box folder and paste the shareable link here before submission.
