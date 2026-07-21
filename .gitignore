@@ -6,6 +6,11 @@
 # anything here manually if it's small enough to matter (<50MB).
 /data/
 
+# Full parsed-violations fact table (~200MB, regenerate locally with
+# scripts/violations/parse_violations.py - see that folder's README).
+# Includes a leftover partial file from a failed sandbox write; safe to delete.
+/scripts/violations/output/
+
 # OS / editor junk
 .DS_Store
 Thumbs.db
