@@ -1,0 +1,8 @@
+raw_result,outcome_bucket,n_occurrences
+Pass,pass,154452
+Fail,fail,57819
+Pass w/ Conditions,pass,44716
+Out of Business,no_outcome,24726
+No Entry,no_outcome,12953
+Not Ready,no_outcome,4110
+Business Not Located,no_outcome,93
