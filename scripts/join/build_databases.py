@@ -33,6 +33,25 @@ Inputs (all relative to the repo root, produced by the three S3 workstreams):
   scripts/violations/parse_violations.py, to avoid depending on that large
   intermediate file existing on disk)
 
+Two follow-up fixes added after the first pass (see notes/S5_change_summary.md
+"known limitations" and the discussion that prompted them):
+
+1. City backfill: a license's establishment row previously took the mode of
+   City across all its inspections, including blank/"Inactive" values, which
+   could win the mode even when a real city was recorded on other inspections
+   of the same establishment. Now blank/"Inactive" are excluded from the mode
+   unless that license has literally no other value to offer.
+2. Synthetic IDs for genuinely unresolved licenses: the 638 rows where
+   license_results found no other record at all previously all collapsed onto
+   the literal raw value ("0" or blank), so two unrelated one-off venues could
+   still collide under the same key. They're now grouped among themselves by
+   normalized (name, address) - so repeat inspections of the same never-
+   licensed place (e.g. the soup kitchen example in the Phase-I report) stay
+   linked - and each resulting group gets a synthetic license_no
+   (SYN-000001, ...) instead of colliding on "0". This does not invent a real
+   license number; it just stops accidental collisions between different
+   establishments.
+
 Usage:
     python build_databases.py <raw_csv> <facility_type_lookup> <city_lookup> \\
         <license_fix> <results_bucketed> <violation_code_lookup> <output_dir>
@@ -44,6 +63,66 @@ import sqlite3
 import sys
 import collections
 from pathlib import Path
+
+BLANK_CITY_VALUES = {"", "inactive"}
+
+
+def normalize(s):
+    return re.sub(r"\s+", " ", (s or "").strip().upper())
+
+
+class UnionFind:
+    def __init__(self):
+        self.parent = {}
+
+    def find(self, x):
+        self.parent.setdefault(x, x)
+        while self.parent[x] != x:
+            self.parent[x] = self.parent[self.parent[x]]
+            x = self.parent[x]
+        return x
+
+    def union(self, a, b):
+        ra, rb = self.find(a), self.find(b)
+        if ra != rb:
+            self.parent[ra] = rb
+
+
+def build_synthetic_license_map(raw_csv_path, license_fix):
+    """For inspection_ids whose license_fix_status is 'unresolved', group them
+    by normalized (address, name) - trying both DBA and AKA as the name - so
+    repeat inspections of the same never-licensed place get the same synthetic
+    ID instead of each colliding on the raw '0'/blank value. Returns
+    {inspection_id: synthetic_license_no}.
+    """
+    uf = UnionFind()
+    unresolved_ids = []
+    key_of = {}  # inspection_id -> list of (addr, name) keys
+    with open(raw_csv_path, newline="", encoding="utf-8", errors="replace") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            insp_id = row["Inspection ID"]
+            fix = license_fix.get(insp_id)
+            if not fix or fix["fix_status"] != "unresolved":
+                continue
+            addr = normalize(row["Address"])
+            names = {normalize(row["DBA Name"]), normalize(row["AKA Name"])} - {""}
+            keys = [f"{addr}|{n}" for n in names] or [f"{addr}|__NONAME__{insp_id}"]
+            key_of[insp_id] = keys
+            unresolved_ids.append(insp_id)
+            for k in keys:
+                uf.union(("row", insp_id), ("key", k))
+
+    group_id = {}
+    next_idx = 1
+    result = {}
+    for insp_id in unresolved_ids:
+        root = uf.find(("row", insp_id))
+        if root not in group_id:
+            group_id[root] = f"SYN-{next_idx:06d}"
+            next_idx += 1
+        result[insp_id] = group_id[root]
+    return result, len(group_id)
 
 csv.field_size_limit(10_000_000)
 
@@ -127,6 +206,8 @@ def build_clean_db(raw_csv_path, facility_lookup_path, city_lookup_path,
     city_map = {r["raw_city"]: r["canonical_city"] for r in load_csv_dict(city_lookup_path)}
     results_map = {r["raw_result"]: r["outcome_bucket"] for r in load_csv_dict(results_bucketed_path)}
     license_fix = load_csv_dict(license_fix_path, key_col="inspection_id")
+    synthetic_license, n_synthetic_groups = build_synthetic_license_map(raw_csv_path, license_fix)
+    print(f"synthetic licenses: {len(synthetic_license)} unresolved inspections -> {n_synthetic_groups} groups")
 
     conn = sqlite3.connect(out_path)
     conn.execute("""
@@ -165,8 +246,11 @@ def build_clean_db(raw_csv_path, facility_lookup_path, city_lookup_path,
             if fix and fix["fix_status"] == "recovered_name_addr":
                 license_no = fix["resolved_license"]
                 fix_status = fix["fix_status"]
+            elif fix and fix["fix_status"] == "unresolved":
+                license_no = synthetic_license[insp_id]  # e.g. SYN-000042, not raw '0'
+                fix_status = fix["fix_status"]
             elif fix:
-                license_no = raw_license  # still 0/blank - ambiguous or unresolved
+                license_no = raw_license  # still 0/blank - ambiguous
                 fix_status = fix["fix_status"]
             else:
                 license_no = raw_license
@@ -181,6 +265,8 @@ def build_clean_db(raw_csv_path, facility_lookup_path, city_lookup_path,
             ))
 
             # only build establishment rows for inspections with a real (non-0/blank) license
+            # (synthetic SYN-###### IDs count as real here - they exist precisely so these
+            # rows get an establishment instead of colliding on '0')
             if license_no and license_no != "0":
                 canon_ft = facility_map.get(row["Facility Type"], row["Facility Type"])
                 canon_city = city_map.get(row["City"], row["City"])
@@ -188,7 +274,12 @@ def build_clean_db(raw_csv_path, facility_lookup_path, city_lookup_path,
                 attrs["dba_name"][row["DBA Name"]] += 1
                 attrs["aka_name"][row["AKA Name"]] += 1
                 attrs["address"][row["Address"]] += 1
-                attrs["city"][canon_city] += 1
+                # Blank/"Inactive" City shouldn't win the mode over a real value recorded
+                # on another inspection of the same establishment - only counted here if
+                # nothing better turns up (see "city" fallback logic when building est_rows).
+                if canon_city.strip().lower() not in BLANK_CITY_VALUES:
+                    attrs["city_valid"][canon_city] += 1
+                attrs["city_all"][canon_city] += 1
                 attrs["state"][row["State"]] += 1
                 attrs["zip"][row["Zip"]] += 1
                 attrs["facility_type"][canon_ft] += 1
@@ -224,20 +315,31 @@ def build_clean_db(raw_csv_path, facility_lookup_path, city_lookup_path,
         )
     """)
     est_rows = []
+    n_city_backfilled = 0
     for license_no, attrs in est_attr_counts.items():
         lat, lon = est_geo.get(license_no, (None, None))
+        # Prefer a real city seen on any of this license's inspections; only fall back
+        # to blank/"Inactive" if literally nothing better was ever recorded for it.
+        if attrs["city_valid"]:
+            city = attrs["city_valid"].most_common(1)[0][0]
+            if attrs["city_all"].most_common(1)[0][0].strip().lower() in BLANK_CITY_VALUES:
+                n_city_backfilled += 1
+        else:
+            city = attrs["city_all"].most_common(1)[0][0]
         est_rows.append((
             license_no,
             attrs["dba_name"].most_common(1)[0][0],
             attrs["aka_name"].most_common(1)[0][0],
             attrs["address"].most_common(1)[0][0],
-            attrs["city"].most_common(1)[0][0],
+            city,
             attrs["state"].most_common(1)[0][0],
             attrs["zip"].most_common(1)[0][0],
             attrs["facility_type"].most_common(1)[0][0],
             lat, lon,
         ))
     conn.executemany("INSERT INTO establishment VALUES (?,?,?,?,?,?,?,?,?,?)", est_rows)
+    print(f"city backfilled from a sibling inspection for {n_city_backfilled} establishments "
+          f"that would otherwise have shown blank/Inactive")
 
     vc_rows = [(r["violation_code"], r["raw_code"], r["era"], r["description"], int(r["n_occurrences"]))
                for r in load_csv_dict(violation_code_path)]

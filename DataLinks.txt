@@ -9,3 +9,10 @@ Cleaned dataset (D'):
   4 files: establishment.csv, inspection.csv, violation_finding.csv,
   violation_code.csv - CSV export of clean.db, built by
   scripts/join/build_databases.py (see scripts/join/README.md).
+
+  NOTE (Kunal, 07/25): establishment.csv and inspection.csv were regenerated
+  after adding the City backfill and synthetic-license-ID fixes (see
+  notes/S5_change_summary.md) - local copies in D_prime_export/ are current,
+  but the files already sitting in the Box folder above are the OLDER version.
+  Re-upload D_prime_export/establishment.csv and D_prime_export/inspection.csv
+  to that same Box folder (overwrite) before final submission.

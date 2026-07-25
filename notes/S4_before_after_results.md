@@ -24,28 +24,28 @@ Food Pantry | 2019 | 2 | 1.0
 Total (facility_type, year) groups on D: 2344
 **D' (clean)**
 ```
-After School Program | 2011 | 2 | 1.0
 Archdiocese | 2021 | 1 | 1.0
 Art Gallery W/wine And Beer | 2016 | 1 | 1.0
 Bar | 2017 | 2 | 1.0
 Catered Events | 2011 | 2 | 1.0
 Distribution Center | 2016 | 1 | 1.0
 Event Center | 2017 | 2 | 1.0
+Farmer's Market | 2010 | 1 | 1.0
 Golf Course | 2014 | 1 | 1.0
 Hair Salon | 2019 | 1 | 1.0
 Hooka Lounge | 2010 | 3 | 1.0
 Hot Dog Station | 2021 | 1 | 1.0
+Illegal Vendor | 2012 | 2 | 1.0
+Illegal Vendor | 2013 | 1 | 1.0
 Internet Cafe | 2018 | 1 | 1.0
 Milk Tea | 2019 | 1 | 1.0
-Nail Shop | 2011 | 1 | 1.0
-Newsstand | 2010 | 2 | 1.0
-... (1147 rows total)
+... (1183 rows total)
 ```
 
-Total (facility_type, year) groups on D': 1147
+Total (facility_type, year) groups on D': 1183
 
 'Restaurant' fail rate on D (exact-spelling only): 0.217 over 173984 inspections
-'Restaurant' fail rate on D' (canonicalized): 0.217 over 174168 inspections
+'Restaurant' fail rate on D' (canonicalized): 0.217 over 174244 inspections
 
 ## Q2 - Most common violations among failed inspections
 
@@ -88,8 +88,8 @@ Total (facility_type, year) groups on D': 1147
 ## IC1 - License # must identify a real establishment (Problem 3)
 
 D:  787 inspections with an unusable License # (unjoinable to any establishment)
-D': 698 inspections still unjoinable after recovery attempt
-IC violations reduced by 89 (11.3%)
+D': 60 inspections still unjoinable after recovery attempt
+IC violations reduced by 727 (92.4%)
 **D' fix_status breakdown**
 ```
 ambiguous | 60
@@ -105,7 +105,7 @@ D': 0 (establishment enforces one facility_type per license_no by construction)
 
 ## IC3 - Distinct value counts (Problems 1 & 2)
 
-Facility Type: D = 521 distinct values, D' = 218 distinct canonical values
+Facility Type: D = 521 distinct values, D' = 231 distinct canonical values
 City: D = 90 distinct values, D' = 69 distinct canonical values
 
 ## IC4 - Results must be a real pass/fail outcome (for U1's fail-rate calc)
