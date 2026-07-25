@@ -60,5 +60,3 @@ DataLinks.txt           Box links to raw + cleaned datasets (cleaned link still 
 - [x] Other scripts / provenance (`scripts/`)
 - [x] Queries (`queries/queries.txt`)
 - [x] `DataLinks.txt` with Box links to raw + cleaned data
-- [ ] Confirm who did the `facility_type_city` OpenRefine work (repo history shows a "james edits"
-      commit) for the team-contributions section
