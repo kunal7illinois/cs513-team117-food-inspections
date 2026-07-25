@@ -48,9 +48,9 @@ DataLinks.txt           Box links to raw + cleaned datasets (cleaned link still 
 |---|---|---|---|
 | S1 | Review/update U1 + dataset description | All | 07/15 |
 | S2 | Profile D to confirm the 4 DQ problems | Kunal (Violations), Zehra (Facility Type/City), Che-Min (License #/Results) | 07/18 |
-| S3 | Clean each problem independently, then join | Kunal, Zehra, Che-Min; Kunal joins | done |
+| S3 | Clean each problem independently, then join | All | done |
 | S4 | Before/after checks, re-run Q1/Q2 on D' | Kunal | done - see `notes/S4_before_after_results.md` |
-| S5 | Document + quantify changes | Kunal | done - see `notes/S5_change_summary.md` |
+| S5 | Document + quantify changes | All | done - see `notes/S5_change_summary.md` |
 
 ## Submission checklist (Phase-II)
 
