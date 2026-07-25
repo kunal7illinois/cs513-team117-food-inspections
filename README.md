@@ -59,7 +59,6 @@ DataLinks.txt           Box links to raw + cleaned datasets (cleaned link still 
 - [x] OpenRefine operation history (`openrefine/OpenRefine.json`)
 - [x] Other scripts / provenance (`scripts/`)
 - [x] Queries (`queries/queries.txt`)
-- [ ] `DataLinks.txt` with Box link to cleaned data - raw is linked, D' still needs uploading
-      from `D_prime_export/` to Box (no Box access from this tooling, needs a person to do it)
+- [x] `DataLinks.txt` with Box links to raw + cleaned data
 - [ ] Confirm who did the `facility_type_city` OpenRefine work (repo history shows a "james edits"
       commit) for the team-contributions section
