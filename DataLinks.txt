@@ -1,8 +1,13 @@
 CS 513 Team 117 - Chicago Food Inspections - Data Links
 
-Original ("dirty") dataset:
+Original ("dirty") dataset (D):
   Course-provided raw file (Food-Inspections-20251023.csv), from Box:
   https://uofi.box.com/s/vns80mmodwj66fj5l30cu31xdgnzcbac
 
 Cleaned dataset (D'):
-  TODO - upload cleaned CSV(s) to a Box folder and paste the shareable link here before submission.
+  TODO (Kunal) - upload the 4 files in D_prime_export/ (establishment.csv,
+  inspection.csv, violation_finding.csv, violation_code.csv - these are the
+  CSV export of clean.db, built by scripts/join/build_databases.py) to a Box
+  folder, then paste the shareable link here. These aren't committed to git
+  (violation_finding.csv alone is ~200MB), so this Box link is the only place
+  D' actually lives for anyone outside the team - don't skip this step.

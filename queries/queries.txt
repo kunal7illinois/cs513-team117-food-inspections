@@ -1,3 +1,117 @@
--- CS 513 Team 117 - Profiling and integrity-constraint queries
--- Paste all SQL/Datalog used to profile D and D', and to check ICs before vs. after cleaning.
--- Keep before/after pairs together and label which dataset (D or D') each ran against.
+CS 513 Team 117 - Chicago Food Inspections
+Profiling and integrity-constraint queries, run against raw.db (D) and clean.db (D'),
+both built by scripts/join/build_databases.py (same table names/shapes in each DB
+where applicable; D is one flat table, D' is normalized per the Phase-I ER diagram).
+Actual result values for every query below are captured in notes/S4_before_after_results.md.
+
+================================================================================
+Q1 - Failure rate by facility type and year
+================================================================================
+-- On D (raw.db) - flat table, no join, but facility_type is uncanonicalized
+-- text so this over-fragments into ~500 groups instead of one per real category.
+SELECT facility_type,
+       CAST(substr(inspection_date, 7, 4) AS INTEGER) AS yr,
+       COUNT(*) AS inspections,
+       AVG(CASE WHEN results = 'Fail' THEN 1.0 ELSE 0 END) AS fail_rate
+FROM inspection_raw
+WHERE results IN ('Pass', 'Pass w/ Conditions', 'Fail')
+GROUP BY facility_type, yr
+ORDER BY fail_rate DESC;
+
+-- On D' (clean.db) - canonical facility_type via the establishment join,
+-- outcome_bucket instead of raw Results so "no_outcome" rows are excluded.
+SELECT e.facility_type,
+       CAST(substr(i.inspection_date, 7, 4) AS INTEGER) AS yr,
+       COUNT(*) AS inspections,
+       AVG(CASE WHEN i.outcome_bucket = 'fail' THEN 1.0 ELSE 0 END) AS fail_rate
+FROM inspection i
+JOIN establishment e ON e.license_no = i.license_no
+WHERE i.outcome_bucket IN ('pass', 'fail')
+GROUP BY e.facility_type, yr
+ORDER BY fail_rate DESC;
+
+================================================================================
+Q2 - Most common violations among failed inspections
+================================================================================
+-- On D (raw.db) - Violations is one unparsed text blob per row, so there is no
+-- row to GROUP BY per violation. The closest thing you *can* run is grouping on
+-- the whole blob, which just counts exact-duplicate inspections and answers a
+-- different (useless) question. Included to show it quantitatively, not as a
+-- real substitute for Q2.
+SELECT violations, COUNT(*) AS n
+FROM inspection_raw
+WHERE results = 'Fail' AND violations != ''
+GROUP BY violations
+ORDER BY n DESC
+LIMIT 15;
+
+-- On D' (clean.db) - real answer, using the era-remapped violation_code so
+-- pre/post-07/01/2018 code collisions (Problem 4) don't get merged.
+SELECT vc.violation_code, vc.description, COUNT(*) AS times_cited
+FROM violation_finding vf
+JOIN inspection i ON i.inspection_id = vf.inspection_id
+JOIN violation_code vc ON vc.violation_code = vf.violation_code
+WHERE i.outcome_bucket = 'fail'
+GROUP BY vc.violation_code, vc.description
+ORDER BY times_cited DESC
+LIMIT 15;
+
+================================================================================
+IC1 - License # must identify a real establishment (Problem 3)
+================================================================================
+-- D: rows with a placeholder license (can't be joined to any facility)
+SELECT COUNT(*) FROM inspection_raw WHERE license_no = '0' OR license_no = '';
+
+-- D': same check, after attempting recovery via name+address matching
+SELECT COUNT(*) FROM inspection WHERE license_no = '0' OR license_no = '';
+
+-- D': breakdown of how those rows were resolved
+SELECT license_fix_status, COUNT(*) FROM inspection GROUP BY license_fix_status;
+
+================================================================================
+IC2 - Facility Type must be consistent per establishment (Problem 1)
+================================================================================
+-- D: license numbers whose inspections disagree on Facility Type
+SELECT COUNT(*) FROM (
+    SELECT license_no FROM inspection_raw
+    WHERE license_no != '0' AND license_no != ''
+    GROUP BY license_no
+    HAVING COUNT(DISTINCT facility_type) > 1
+);
+
+-- D': by construction, establishment has exactly one facility_type per
+-- license_no (chosen as the mode across that license's inspections), so this
+-- denial constraint can't be violated post-cleaning.
+SELECT COUNT(*) FROM (
+    SELECT license_no FROM establishment
+    GROUP BY license_no
+    HAVING COUNT(DISTINCT facility_type) > 1
+);
+
+================================================================================
+IC3 - Distinct value counts for the two clustered columns (Problems 1 & 2)
+================================================================================
+SELECT COUNT(DISTINCT facility_type) FROM inspection_raw;      -- D
+SELECT COUNT(DISTINCT facility_type) FROM establishment;       -- D'
+SELECT COUNT(DISTINCT city) FROM inspection_raw;                -- D
+SELECT COUNT(DISTINCT city) FROM establishment;                 -- D'
+
+================================================================================
+IC4 - Results must be a real pass/fail outcome for U1's fail-rate calculation
+================================================================================
+-- D: rows where Results doesn't represent an actual inspection outcome, but
+-- would still get counted in a naive fail-rate denominator if you forgot to
+-- filter (Out of Business, No Entry, Not Ready, Business Not Located)
+SELECT results, COUNT(*) FROM inspection_raw
+WHERE results NOT IN ('Pass', 'Fail', 'Pass w/ Conditions')
+GROUP BY results;
+
+-- D': same rows, now explicitly bucketed so U1 queries can filter them out
+-- with outcome_bucket = 'no_outcome' instead of relying on remembering all
+-- four raw string values.
+SELECT raw_result, outcome_bucket, n_occurrences FROM (
+    SELECT raw_result, outcome_bucket, COUNT(*) AS n_occurrences
+    FROM (SELECT results AS raw_result, results AS outcome_bucket FROM inspection_raw)
+    GROUP BY raw_result
+);
+-- (in practice we read this straight from results_bucketed.csv - see that file)

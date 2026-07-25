@@ -1,0 +1,522 @@
+raw_facility_type,canonical_facility_type,n_occurrences
+Restaurant,Restaurant,201947
+Grocery Store,Grocery Store,36328
+School,School,18822
+Children's Services Facility,Children's Services Facility,7111
+,,5264
+Bakery,Bakery,4295
+Daycare Above and Under 2 Years,Daycare,3958
+Daycare (2 - 6 Years),Daycare,3183
+Long Term Care,Long Term Care,2314
+Catering,Catering,1849
+Liquor,Liquor,1279
+Mobile Food Preparer,Mobile Food,1160
+Mobile Food Dispenser,Mobile Food,951
+Hospital,Hospital,933
+Golden Diner,Golden Diner,853
+Daycare Combo 1586,Daycare,667
+Wholesale,Wholesale,574
+Shared Kitchen User (Long Term),Shared Kitchen User,441
+TAVERN,Liquor,412
+Special Event,Special Event,358
+Shared Kitchen,Shared Kitchen User,304
+Daycare (Under 2 Years),Daycare,284
+BANQUET HALL,Banquet,227
+GAS STATION,Gas Station,206
+CHARTER SCHOOL,School,166
+Mobile Prepared Food Vendor,Mobile Food,155
+Shelter,Shelter,144
+KIOSK,Kiosk,104
+LIVE POULTRY,Live Poultry,103
+BANQUET,Banquet,101
+PRIVATE SCHOOL,School,95
+Mobile Frozen Desserts Vendor,Mobile Food,90
+DAYCARE,Daycare,75
+ROOFTOP,Rooftop,69
+Navy Pier Kiosk,Navy Pier Kiosk,66
+STADIUM,Stadium,64
+Pop-Up Establishment Host-Tier II,Pop-up Establishment,60
+GROCERY STORE/GAS STATION,Grocery Store,54
+RESTAURANT/BAR,Restaurant,54
+CAFETERIA,Cafeteria,52
+HOTEL,Hotel,52
+Shared Kitchen User (Short Term),Shared Kitchen User,50
+ROOFTOPS,Rooftop,49
+GROCERY/RESTAURANT,Restaurant,45
+SUPPORTIVE LIVING,Assisted Living,45
+STORE,Store,45
+1023 CHILDERN'S SERVICES FACILITY,Children's Services Facility,43
+CONVENIENCE STORE,Convenience Store,42
+ICE CREAM SHOP,Ice Cream,41
+COMMISSARY,Commissary,37
+COOKING SCHOOL,Cooking School,37
+RESTAURANT/GROCERY STORE,Restaurant,35
+ROOF TOPS,Rooftop,35
+ASSISTED LIVING,Assisted Living,34
+CHURCH,Church,34
+Banquet Hall,Banquet,33
+CULINARY SCHOOL,Cooking School,33
+NURSING HOME,Nursing Home,30
+CHURCH KITCHEN,Church,30
+ROOF TOP,Rooftop,28
+Grocery & Restaurant,Restaurant,28
+convenience store,Convenience Store,28
+CONVENIENCE,Convenience Store,28
+HERBALIFE,Herbal,27
+PALETERIA,Paleteria,27
+coffee shop,Cafe,27
+THEATER,Theater,26
+Grocery(Sushi prep),Grocery Store,25
+AFTER SCHOOL PROGRAM,After School Program,25
+UNIVERSITY CAFETERIA,Cafeteria,24
+CHARTER,Charter,23
+GAS STATION/MINI MART,Gas Station,23
+Live Poultry,Live Poultry,23
+Banquet,Banquet,22
+1023-CHILDREN'S SERVICES FACILITY,Children's Services Facility,22
+Private School,School,22
+ADULT DAYCARE,Daycare,21
+PUBLIC SHCOOL,School,21
+BREWERY,Brewery,21
+REHAB CENTER,Rehab Center,20
+FITNESS CENTER,Fitness Center,20
+WRIGLEY ROOFTOP,Rooftop,20
+CHILDRENS SERVICES FACILITY,Children's Services Facility,19
+Daycare Night,Daycare Night,19
+Assisted Living Senior Care,Assisted Living,19
+GAS STATION/GROCERY,Grocery Store,19
+BAR,Bar,19
+MOBILE DESSERTS VENDOR,Mobile Food,19
+Wrigley Roof Top,Rooftop,19
+GAS STATION/RESTAURANT,Gas Station,18
+RIVERWALK,Riverwalk,18
+MOBILE FOOD,Mobile Food,18
+GROCERY STORE/COOKING SCHOOL,Grocery Store,18
+MOVIE THEATER,Theater,18
+JUICE BAR,Juice Bar,18
+bar,Bar,18
+Other,Other,18
+cooking school,Cooking School,18
+convenience,Convenience Store,18
+MOBILE FOOD TRUCK,Mobile Food,18
+LOUNGE/BANQUET HALL,Lounge/banquet Hall,17
+MUSIC VENUE,Music Venue,17
+MOVIE THEATRE,Theater,17
+Tavern,Liquor,17
+EVENT SPACE,Event Center,16
+CHURCH/SPECIAL EVENTS,Church,16
+GROCERY/BAKERY,Grocery Store,16
+tavern,Liquor,16
+THEATRE,Theater,16
+Long Term Care Facility,Long Term Care,16
+banquets,Banquet,15
+A-Not-For-Profit Chef Training Program,A-not-for-profit Chef Training Program,15
+DINING HALL,Dining Hall,15
+Pop-Up Food Establishment User-Tier II,Pop-up Establishment,15
+Coffee shop,Cafe,15
+SENIOR DAY CARE,Daycare,15
+GAS STATION/STORE,Grocery Store,15
+GROCERY/GAS STATION,Grocery Store,15
+gas station,Gas Station,15
+CUSTOM POULTRY SLAUGHTER,Custom Poultry Slaughter,15
+GROCERY STORE/BAKERY,Grocery Store,15
+1023,1023,15
+Daycare (2 Years),Daycare,15
+BANQUET HALL/CATERING,Banquet,14
+OUTREACH CULINARY KITCHEN,Outreach Culinary Kitchen,14
+DAYCARE 2 YRS TO 12 YRS,Daycare,14
+EVENT CENTER,Event Center,14
+PASTRY school,Pastry School,14
+SLAUGHTER HOUSE/ GROCERY,Slaughter House/ Grocery,14
+CATERING/CAFE,Catering/cafe,13
+donut shop,Donut Shop,13
+BANQUET FACILITY,Banquet,13
+NIGHT CLUB,Night Club,12
+REGULATED BUSINESS,Regulated Business,12
+COFFEE SHOP,Cafe,12
+CATERING/BANQUET,Banquet,12
+DAY CARE 2-14,Daycare,12
+Church,Church,12
+COLLEGE,College,12
+GROCERY AND BUTCHER,Grocery Store,12
+employee kitchen,Employee Kitchen,12
+COMMISSARY FOR SOFT SERVE ICE CREAM TRUCKS,Commissary For Soft Serve Ice Cream Trucks,12
+WINE STORE,Wine Store,12
+GROCERY STORE/TAQUERIA,Grocery Store,12
+WAREHOUSE,Warehouse,11
+Pop-Up Establishment Host-Tier III,Pop-up Establishment,11
+CANDY STORE,Candy Store,11
+CANDY/GELATO,Candy/gelato,11
+convenience/drug store,Convenience Store,11
+Banquet Dining,Banquet,11
+Cafeteria,Cafeteria,11
+Banquet rooms,Banquet,11
+BAKERY/DELI,Bakery/deli,11
+RESTAURANT/HOSPITAL,Restaurant,11
+MOBILE FROZEN DESSERTS DISPENSER-NON-MOTORIZED,Frozen Desserts Dispenser,11
+Airport Lounge,Airport Lounge,10
+ICE CREAM,Ice Cream,10
+GROCERY/TAQUERIA,Grocery Store,10
+Restaurant(protein shake bar),Restaurant,10
+RETAIL STORE OFFERS COOKING CLASSES,Grocery Store,10
+grocery/dollar store,Grocery Store,10
+COMMISARY,Commissary,9
+CONVENIENT STORE,Convenience Store,9
+COFFEE KIOSK,Cafe,9
+HOT DOG STATION,Hot Dog Station,9
+BANQUET ROOM,Banquet,9
+Banquet/kitchen,Banquet,9
+CHARITY AID KITCHEN,Charity Aid Kitchen,9
+RESTAURANT.BANQUET HALLS,Restaurant,9
+COFFEE CART,Cafe,9
+REST/GROCERY,Rest/grocery,9
+cafeteria,Cafeteria,9
+GROCERY STORE/ RESTAURANT,Restaurant,9
+CITY OF CHICAGO COLLEGE,City Of Chicago College,9
+PANTRY,Pantry,9
+RESTUARANT AND BAR,Restaurant,9
+NOT-FOR-PROFIT CLUB,Not For Profit,8
+FROZEN DESSERT PUSHCARTS,Frozen Desserts Dispenser,8
+DISTRIBUTION CENTER,Distribution Center,8
+TEACHING SCHOOL,Teaching School,8
+VENDING COMMISSARY,Vending Commissary,8
+BEFORE AND AFTER SCHOOL PROGRAM,Before And After School Program,8
+LIQUOR STORE,Liquor,8
+CHARTER SCHOOL CAFETERIA,Cafeteria,8
+LIQUOR/GROCERY STORE/BAR,Liquor,8
+15 monts to 5 years old,15 Monts To 5 Years Old,8
+GROCERY/SERVICE GAS STATION,Grocery Store,8
+Poultry Slaughter,Poultry Slaughter,8
+meat packing,Meat Packing,8
+CULINARY ARTS SCHOOL,Culinary Arts School,8
+1023 CHILDERN'S SERVICE S FACILITY,Children's Services Facility,8
+REST/ROOFTOP,Rest/rooftop,8
+grocery/butcher,Grocery Store,8
+youth housing,Youth Housing,7
+GYM STORE,Gym Store,7
+VFW HALL,Vfw Hall,7
+ROOM SERVICE,Room Service,7
+HIGH SCHOOL KITCHEN,High School Kitchen,7
+1023 CHILDREN'S SERVICES FACILITY,Children's Services Facility,7
+school cafeteria,Cafeteria,7
+HERBAL LIFE SHOP,Herbal,7
+TRUCK,Truck,7
+butcher shop,Butcher Shop,7
+GROCERY/DRUG STORE,Grocery Store,7
+HOSTEL,Hostel,7
+fish market,Fish Market,7
+Rest/GYM,Rest/gym,7
+DRUG/FOOD STORE,Drug/food Store,7
+GROCERY STORE / GAS STATION,Grocery Store,7
+RESTAURANT/BAKERY,Restaurant,7
+GROCERY STORE,Grocery Store,6
+CANDY SHOP,Candy Shop,6
+THC INFUSED BAKERY,Thc Infused Bakery,6
+HERBALIFE/ZUMBA,Herbal,6
+HERBAL LIFE,Herbal,6
+COFFEE  SHOP,Cafe,6
+GAS STATION/FOOD,Gas Station,6
+LIQUOR/COFFEE KIOSK,Liquor,6
+GROCERY/DELI,Grocery Store,6
+JUICE AND SALAD BAR,Juice Bar,6
+HERBAL MEDICINE,Herbal,6
+HEALTH CARE STORE,Health Care Store,6
+GAS STATION/CONVENIENCE STORE,Gas Station,6
+CHURCH (SPECIAL EVENTS),Church,6
+NORTHERLY ISLAND,Northerly Island,6
+DAYCARE COMBO,Daycare Combo,6
+MOBILE FROZEN DESSERT VENDOR,Mobile Food,6
+GROCERY/CAFE,Grocery Store,6
+grocery,Grocery Store,6
+WINE TASTING BAR,Wine Tasting Bar,6
+banquet hall,Banquet,6
+Pool,Pool,6
+"DAYCARE 2-6, UNDER 6",Daycare,6
+NUTRITION SHAKES,Nutrition Shakes,5
+HERBAL DRINKS,Herbal,5
+Adult Family Care Center,Adult Family Care Center,5
+MOBIL FOOD PREPARED,Mobile Food,5
+GAS STATION STORE,Grocery Store,5
+private school,School,5
+PACKAGED HEALTH FOODS,Packaged Food,5
+MILK TEA,Milk Tea,5
+SUSHI COUNTER,Sushi Counter,5
+theater,Theater,5
+POULTRY SLAUGHTER,Poultry Slaughter,5
+DRUG STORE/GROCERY,Drug Store,5
+DRUG STORE,Drug Store,5
+PHARMACY,Pharmacy,5
+MFD TRUCK,Mfd Truck,5
+EXERCISE AND NUTRITION BAR,Exercise And Nutrition Bar,5
+FRENCH MARKET SPACE,French Market Space,5
+CHILDERN'S SERVICES  FACILITY,Children's Services Facility,5
+GOLF COURSE CONNCESSION STAND,Golf Course Conncession Stand,5
+snack shop,Snack Shop,5
+SMOKEHOUSE,Smokehouse,5
+GAS STATION/STORE GROCERY,Gas Station,5
+PACKAGED LIQUOR,Liquor,5
+BAR/GRILL,Bar,5
+Deli,Deli,5
+RIVERWALK CAFE,Riverwalk,5
+GAS STATION /GROCERY,Grocery Store,5
+grocery & restaurant,Restaurant,5
+GROCERY STORE/DELI,Grocery Store,5
+GROCERY STORE/RESTAURANT,Restaurant,4
+LIVE POULTRY SLAUGHTER,Live Poultry,4
+COOKING CLASS,Cooking School,4
+LIVE POULTRY SLAUGHTER FACILITY,Live Poultry,4
+MOBILPREPARED FOOD VENDOR,Mobile Food,4
+FOOD PANTRY,Pantry,4
+HERBAL REMEDY,Herbal,4
+GROCERY & LIQUOR STORE,Grocery Store,4
+BUTCHER SHOP,Butcher Shop,4
+hooka lounge,Hooka Lounge,4
+RETAIL,Retail,4
+Herabalife,Herbal,4
+DOLLAR STORE,Dollar Store,4
+Animal Shelter Cafe Permit,Animal Shelter Cafe Permit,4
+BEVERAGE/SILVERWARE WAREHOUSE,Beverage/silverware Warehouse,4
+PUSH CARTS,Push Carts,4
+COLD/FROZEN FOOD STORAGE,Cold/frozen Food Storage,4
+GROCERY,Grocery Store,4
+CAFE/STORE,Cafe,4
+Long-Term Care,Long Term Care,4
+RETAIL FOOD/GAS STATION,Retail Food/gas Station,4
+dollar store,Dollar Store,4
+BOWLING LANES/BANQUETS,Bowling Lanes/banquets,4
+DAY CARE 1023,Daycare,4
+RETAIL STORE,Grocery Store,4
+video store,Video Store,4
+RESTAURANT/GROCERY,Restaurant,4
+THEATER/BAR,Theater,4
+Ice cream,Ice Cream,4
+Long-Term Care Facility,Long Term Care,4
+MEXICAN CANDY STORE,Mexican Candy Store,4
+COFFEE VENDING MACHINE,Cafe,4
+WHOLESALE & RETAIL,Wholesale,3
+Herbalife Nutrition,Herbal,3
+SHAKES/TEAS,Shakes/teas,3
+POPCORN CORN,Popcorn Shop,3
+GROCERY STORE PLUS WIRELESS STORE,Grocery Store,3
+WHOLESALE BAKERY,Wholesale,3
+COFFEE AND/OR DRINKS,Cafe,3
+liquor store,Liquor,3
+ADULT DAY SERVICE,Daycare,3
+PASTRY SCHOOL,Pastry School,3
+TEST KITCHEN/ STORAGE,Test Kitchen/ Storage,3
+NUTRITION..SMOOTHIES/SHAKES,Nutrition Shakes,3
+ARCHDIOCESE,Archdiocese,3
+JUICE BAR/GROCERY,Grocery Store,3
+CULINARY CLASS ROOMS,Cooking School,3
+RETAIL FOOD,Retail Food,3
+DELI/BAKERY,Deli/bakery,3
+MOBILE PUSH CART,Mobile Push Cart,3
+DISTILLERY WITH TASTING ROOM,Distillery With Tasting Room,3
+FOOD BOOTH,Food Booth,3
+PRIVATE CLUB,School,3
+GENERAL STORE,General Store,3
+CONVENIENCE/GAS STATION,Convenience Store,3
+CONVNIENCE STORE,Convenience Store,3
+blockbuster video,Blockbuster Video,3
+UNUSED STORAGE,Unused Storage,3
+Tavern/Bar,Tavern/bar,3
+KITCHEN DEMO,Kitchen Demo,3
+DOLLAR TREE,Dollar Tree,3
+smoothie bar,Smoothie Bar,3
+Food Pantry,Pantry,3
+PREP INSIDE SCHOOL,Prep Inside School,3
+Lounge,Lounge,3
+FITNESS STUDIO,Fitness Center,3
+CHURCH/SPECIAL EVENT,Church,3
+Shuffleboard Club with Bar,Shuffleboard Club With Bar,3
+Laundromat,Laundromat,3
+CHINESE HERBS,Chinese Herbs,3
+PRE PACKAGED,Pre Packaged,3
+weight loss program,Weight Loss Program,3
+COFFEE/TEA,Cafe,3
+HERBALCAL,Herbal,3
+fitness center,Fitness Center,3
+HEALTH CENTER,Health Center,3
+DAYCARE 6 WKS-5YRS,Daycare 6 Wks-5yrs,3
+DOLLAR & GROCERY STORE,Dollar & Grocery Store,3
+SOCIAL CLUB,Social Club,3
+GELATO SHOP,Gelato Shop,3
+CELL PHONE STORE,Cell Phone Store,3
+TEMPORARY KIOSK,Temporary Kiosk,3
+GOLF COURSE,Golf Course,3
+PACKAGED FOOD DISTRIBUTION,Packaged Food,3
+BAKERY/GROCERY,Bakery/grocery,3
+DAY CARE,Daycare,3
+1005 NURSING HOME,Nursing Home,3
+newsstand,Newsstand,3
+coffee,Cafe,3
+CATERED EVENTS,Catered Events,3
+NON -PROFIT,Non -profit,3
+Commissary,Commissary,3
+Illegal Vendor,Illegal Vendor,3
+TENT RSTAURANT,Tent Rstaurant,3
+banquets/room service,Banquet,3
+Church Kitchen,Church,3
+Mobile Frozen Dessert Dispenser_non  Motorized.,Mobile Food,3
+CHURCH/DAY CARE,Church,3
+live butcher,Live Butcher,3
+watermelon house,Watermelon House,3
+PALETERIA /ICECREAM SHOP,Paleteria /icecream Shop,3
+ICE CREAM PARLOR,Ice Cream,3
+Candy,Candy,3
+SOUP KITCHEN AND PANTRY,Soup Kitchen And Pantry,2
+CPS (CHARTER),Cps (charter),2
+FOOD HALL,Food Hall,2
+COFFEE ROASTER,Cafe,2
+CULINARY KITCHEN,Culinary Kitchen,2
+LIQUOR/GROCERY,Liquor,2
+UNLICENSED FACILITY,Unlicensed Facility,2
+"BUTCHER, DELI","Butcher, Deli",2
+FREE FOOD PANTRY,Pantry,2
+COMMIASARY,Commissary,2
+GREENHOUSE,Greenhouse,2
+ENTERTAINMENT VENUE,Entertainment Venue,2
+SHELTER,Shelter,2
+CATERED LIQUOR,Catered Liquor,2
+RETAIL SALES,Retail Sales,2
+TAVERN/PACKAGED GOODS,Tavern/packaged Goods,2
+NEWSSTAND,Newsstand,2
+COLD STORAGE FACILITY,Cold Storage Facility,2
+FLEA MARKET,Flea Market,2
+hair salon,Hair Salon,2
+Hair Salon,Hair Salon,2
+SPA,Spa,2
+DOLLAR STORE WITH GROCERY,Dollar Store With Grocery,2
+MOBILE FOOD DESSERTS VENDOR,Mobile Food,2
+PRIVATE EVENT SPACE,Pantry,2
+REPACKAGING PLANT,Repackaging Plant,2
+PREPACKAGE MEAL DISTRIBUTOR (1006 Retail),Prepackage Meal Distributor (1006 Retail),2
+SERVICE GAS STATION,Gas Station,2
+HAIR SALON,Hair Salon,2
+GYM,Gym,2
+GROCERY STORE /PHARMACY,Grocery Store,2
+HELICOPTER TERMINAL,Helicopter Terminal,2
+1475 LIQUOR,Liquor,2
+EVENT VENU,Event Center,2
+GROCERY(GAS STATION),Grocery Store,2
+TOBACCO STORE,Tobacco Store,2
+VENDING MACHINE,Vending Machine,2
+CLOTHING STORE,Clothing Store,2
+LIQOUR BREWERY TASTING,Liquor,2
+SUMMER FEEDING PREP AREA,Summer Feeding,2
+RESTAURANT/BAR/THEATER,Restaurant,2
+RETAIL WINE/WINE BAR,Retail Wine/wine Bar,2
+Museum/Gallery,Museum/gallery,2
+DISTRIBUTOR,Distribution Center,2
+TEA STORE,Tea Store,2
+URBAN FARM,Urban Farm,2
+MASSAGE BAR,Massage Bar,2
+NUTRITION/HERBALIFE,Herbal,2
+GROCERY/ RESTAURANT,Restaurant,2
+PUSHCART,Pushcart,2
+Dollar store,Dollar Store,2
+GAS STATION/ GROCERY STORE,Grocery Store,2
+ART GALLERY W/WINE AND BEER,Art Gallery W/wine And Beer,2
+HOT DOG CART,Hot Dog Cart,2
+1584-DAY CARE ABOVE 2 YEARS,1584-day Care Above 2 Years,2
+night club,Night Club,2
+POPCORN SHOP,Popcorn Shop,2
+MAIN KITCHEN,Main Kitchen,2
+Mobile Frozen Dessert Disp/Non-motorized,Mobile Food,2
+CHILDERN ACTIVITY FACILITY,Children's Services Facility,2
+Catering and Wholesale,Catering And Wholesale,2
+CHARTER SCHOOL/CAFETERIA,Cafeteria,2
+GAS STATION /SUBWAY MINI MART.,Gas Station,2
+CAFE,Cafe,2
+School Cafeteria,Cafeteria,2
+BOYS AND GIRLS CLUB,Boys And Girls Club,2
+warehouse,Warehouse,2
+LIQUORE STORE/BAR,Liquor,2
+SUMMER FEEDING,Summer Feeding,2
+BAKERY/ RESTAURANT,Restaurant,2
+after school program,After School Program,2
+NOT FOR PROFIT,Not For Profit,2
+RESTAURANT/LIQUOR,Restaurant,2
+LIQUOR CONSUMPTION ON PREMISES.,Liquor,2
+ASSISSTED LIVING,Assisted Living,2
+Nutrition Store,Nutrition Shakes,2
+DAYCARE 1586,Daycare,2
+FOOD PANTRY/CHURCH,Pantry,2
+Social Club,Social Club,2
+bakery/restaurant,Restaurant,2
+unlicensed facility,Unlicensed Facility,2
+(gas station),Gas Station,2
+tavern/restaurant,Restaurant,2
+PRODUCE STAND,Produce Stand,2
+LINITED BUSINESS,Linited Business,2
+SOUP KITCHEN,Soup Kitchen,2
+candy/gelato,Candy/gelato,2
+CANDY MAKER,Candy Maker,2
+Shared Kitchen Supplemental,Shared Kitchen User,1
+CHURCH (FOOD PANTRY),Church,1
+GAS/MINI MART,Gas Station,1
+Pop-Up Food Establishment User-Tier I,Pop-up Establishment,1
+health club,Health Club,1
+HEALTH FOOD STORE,Health Food Store,1
+ART CENTER,Art Center,1
+GAS STATION FOOD STORE,Gas Station,1
+Internet Cafe,Internet Cafe,1
+HERBALIFE STORE,Herbal,1
+FURNITURE STORE,Furniture Store,1
+Gift Shop,Gift Shop,1
+WEIGHT LOSS PROGRAM,Weight Loss Program,1
+RESTAURANT AND LIQUOR,Restaurant,1
+PREPACAKAGED FOODS,Prepacakaged Foods,1
+TAP room/tavern/liquor store,Liquor,1
+ART GALLERY,Art Gallery W/wine And Beer,1
+HERBAL,Herbal,1
+SERVICE BAR/THEATRE,Service Bar/theatre,1
+Mobile frozen dessert vendor,Mobile Food,1
+GROCERY/LIQUOR STORE,Grocery Store,1
+HEALTH CENTER/NUTRITION CLASSES,Health Center,1
+PROTEIN SHAKE BAR,Protein Shake Bar,1
+day spa,Day Spa,1
+MOBILE DESSERT VENDOR,Mobile Food,1
+MOBILE DESSERT CART,Mobile Food,1
+CAT/LIQUOR,Cat/liquor,1
+BOOK STORE,Book Store,1
+Gas station,Gas Station,1
+CAR WASH,Car Wash,1
+TAVERN/RESTAURANT,Restaurant,1
+ALTERNATIVE SCHOOL,Alternative School,1
+TAVERN-LIQUOR,Liquor,1
+Food Vending Machines,Food Vending Machines,1
+CHICAGO PARK DISTRICT,Chicago Park District,1
+TAVERN/1006,Liquor,1
+HERBAL STORE,Herbal,1
+LAUNDROMAT,Laundromat,1
+FROZEN DESSERTS DISPENSER-NON-MOTORIZED,Frozen Desserts Dispenser,1
+FROZEN DESSERTS DISPENSER -NON MOTORIZED,Frozen Desserts Dispenser,1
+MOBILE FROZEN DESSERTS DISPENSER-NON- MOTORIZED,Frozen Desserts Dispenser,1
+MOBILE FROZEN DESSERTS DISPENSER-NON-MOTOR,Mobile Food,1
+NAIL SHOP,Nail Shop,1
+NON-FOR PROFIT BASEMENT KIT,Non-for Profit Basement Kit,1
+Meat Market,Meat Market,1
+drug treatment facility,Drug Treatment Facility,1
+SHARED KITCHEN USER (LONG TREM),Shared Kitchen User,1
+NP-KIOSK,Np-kiosk,1
+Day Care Combo (1586),Daycare,1
+MOBIL FOOD 1315,Mobile Food,1
+LONG TERM CARE FACILITY,Long Term Care,1
+CHURCH/AFTER SCHOOL PROGRAM,Church,1
+GROCERY & RESTAURANT,Restaurant,1
+(convenience store),Convenience Store,1
+Convenience Store,Convenience Store,1
+PEDDLER,Peddler,1
+AFTER SCHOOL CARE,After School Care,1
+HOOKA BAR,Hooka Bar,1
+KIDS CAFE,Kids Cafe,1
+ROOFTOP PATIO,Rooftop,1
+DRUG STORE/W/ FOOD,Drug Store,1
+GROCERY/LIQUOR,Grocery Store,1
+FARMER'S MARKET,Farmer's Market,1
+PRODUCE VENDOR,Produce Stand,1
+religious,Religious,1
+TAVERN/LIQUOR,Liquor,1
+incubator,Incubator,1
+Kids Cafe',Kids Cafe,1

@@ -11,6 +11,12 @@
 # Includes a leftover partial file from a failed sandbox write; safe to delete.
 /scripts/violations/output/
 
+# D and D' database files + D' CSV export - regenerate locally with
+# scripts/join/build_databases.py (see that folder's README). The CSV export
+# is what gets uploaded to Box per DataLinks.txt.
+/scripts/join/output/
+/D_prime_export/
+
 # OS / editor junk
 .DS_Store
 Thumbs.db

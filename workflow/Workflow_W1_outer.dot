@@ -1,0 +1,86 @@
+/*
+ * Workflow_W1_outer.dot
+ *
+ * Outer ("W1") workflow for the CS 513 Team 117 Phase-II project: the whole
+ * pipeline from the raw Chicago Food Inspections CSV (D) to the cleaned,
+ * normalized dataset (D') and the before/after validation that supports U1.
+ *
+ * Matches the Phase-I plan's S1-S5 steps and file contract: three
+ * independent cleaning workstreams (S3) read only the raw CSV and write to
+ * their own output file, Kunal joins them (S3 join), then S4/S5 validate
+ * and quantify the result.
+ *
+ * Render with:
+ *   dot -Tpng Workflow_W1_outer.dot -o Workflow_W1_outer.png
+ *   dot -Tpdf Workflow_W1_outer.dot -o Workflow_W1_outer.pdf
+ */
+
+digraph Team117OuterWorkflow {
+    rankdir=LR;
+    fontname="Helvetica";
+    node [fontname="Helvetica", fontsize=11];
+    edge [fontname="Helvetica", fontsize=9, color="#555555"];
+    compound=true;
+
+    // Data artifacts
+    node [shape=box, style="rounded,filled", fillcolor="#F5F5F5", color="#999999"];
+    raw_csv [label="Food-Inspections-20251023.csv\n(D, 298,869 rows)"];
+    vfind [label="violation_finding_clean.csv\n+ violation_code_lookup.csv"];
+    ftype_city [label="facility_type_lookup.csv\n+ city_lookup.csv\n+ OpenRefine.json"];
+    lic_results [label="license_fix.csv\n+ results_bucketed.csv"];
+    raw_db [label="raw.db (D)"];
+    clean_db [label="clean.db (D')\nestablishment / inspection /\nviolation_finding / violation_code"];
+    dprime_export [label="D_prime_export/*.csv\n-> Box (DataLinks.txt)"];
+    before_after [label="S4_before_after_results.md\n(Q1, Q2, IC checks)"];
+    change_summary [label="S5_change_summary.md"];
+    report [label="Phase-II report (PDF)\n+ supplementary ZIP"];
+
+    // Processes
+    node [shape=box, style="rounded,filled", fillcolor="#EAF2FB", color="#2E5C8A", penwidth=1.4];
+
+    subgraph cluster_s3 {
+        label="S3 - clean (parallel, independent - each reads only raw_csv)";
+        style="dashed"; color="#B98900"; fontname="Helvetica"; fontsize=10;
+        parse_violations [label="parse_violations.py\n(Kunal)\nparse + era-remap 07/01/2018"];
+        openrefine [label="OpenRefine clustering\n(Zehra)\nFacility Type + City"];
+        clean_license [label="clean_license_results.py\n(Che-Min)\nLicense #=0 fix + Results bucket"];
+    }
+
+    build_db [label="build_databases.py\n(Kunal - S3 join)"];
+    run_queries [label="run_before_after.py\n(Kunal - S4)"];
+    summarize [label="S5 change summary\n(Kunal, compiling all)"];
+    write_report [label="Phase-II report\n(All)"];
+
+    // Edges
+    raw_csv -> parse_violations;
+    raw_csv -> openrefine;
+    raw_csv -> clean_license;
+
+    parse_violations -> vfind;
+    openrefine -> ftype_city;
+    clean_license -> lic_results;
+
+    raw_csv -> build_db;
+    vfind -> build_db;
+    ftype_city -> build_db;
+    lic_results -> build_db;
+
+    build_db -> raw_db;
+    build_db -> clean_db;
+    clean_db -> dprime_export;
+
+    raw_db -> run_queries;
+    clean_db -> run_queries;
+    run_queries -> before_after;
+
+    before_after -> summarize;
+    vfind -> summarize [style=dotted, label="cell counts"];
+    ftype_city -> summarize [style=dotted, label="cell counts"];
+    lic_results -> summarize [style=dotted, label="cell counts"];
+    summarize -> change_summary;
+
+    change_summary -> write_report;
+    before_after -> write_report;
+    dprime_export -> write_report [style=dotted, label="DataLinks.txt"];
+    write_report -> report;
+}

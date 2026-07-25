@@ -15,27 +15,31 @@ See the Phase-I report for full details on U1/U0/U2 and the four documented data
 
 The raw CSV (~313MB) is **not** in this repo - it's too large for GitHub and the assignment asks
 us to link data via Box rather than commit it. Download it from the Box link above and drop it in
-`Chicago-Food-Inspection/` locally (that path is gitignored). The raw + cleaned datasets we
-produce will be uploaded to a Box folder and linked in `DataLinks.txt` before final submission.
+`Chicago-Food-Inspection/` locally (that path is gitignored).
 
 ## Repo layout
 
-This mirrors the file contract from our Phase-I plan (Section 4): each person reads only the raw
-CSV and writes to their own output file, so work stays independent until the final join.
+Mirrors the file contract from our Phase-I plan (Section 4): each person reads only the raw CSV
+and writes to their own output file, so work stayed independent until the final join.
 
 ```
 scripts/
-  violations/          Kunal  - parse pipe-delimited Violations field, remap pre/post 07/01/2018 codes
-                                 -> violation_finding_clean.csv
-  facility_type_city/  Zehra  - OpenRefine clustering for Facility Type + City -> two lookup tables
-  license_results/     Che-Min - resolve License #=0, bucket Results into true outcomes
-                                 -> license_fix.csv, results_bucketed.csv
-  join/                Kunal  - joins the four outputs above into D' (single SQLite script)
+  violations/          Kunal    - parse Violations field, remap pre/post 07/01/2018 codes
+                                   -> violation_code_lookup.csv (committed), violation_finding_clean.csv (local only, ~200MB)
+  facility_type_city/  Zehra    - OpenRefine clustering for Facility Type + City
+                                   -> facility_type_lookup.csv, city_lookup.csv
+  license_results/     Che-Min  - resolve License #=0, bucket Results into true outcomes
+                                   -> license_fix.csv, results_bucketed.csv
+  join/                Kunal    - build_databases.py builds raw.db (D) + clean.db (D') from all
+                                   of the above; run_before_after.py runs the before/after queries
 
-openrefine/            OpenRefine operation history, exported as OpenRefineHistory.json
-queries/               queries.txt - SQL used to profile D and check ICs before/after cleaning
-workflow/              Workflow diagram(s) for the outer (W1) and inner/OpenRefine (W2) workflows
-DataLinks.txt          Box links to raw + cleaned datasets (fill in before final submission)
+openrefine/            OpenRefine.json - operation history (115 ops, Facility Type + City)
+queries/               queries.txt - SQL used to profile D and D' and check ICs before/after
+workflow/              Workflow_W1_outer.* (whole pipeline) and Workflow_W2_inner.* (OpenRefine steps)
+notes/                 Per-step writeups (S1 review, S2 profiling, S4 results, S5 change summary)
+D_prime_export/        CSV export of clean.db - the actual D' files, gitignored (~230MB total),
+                        upload to Box and link in DataLinks.txt
+DataLinks.txt           Box links to raw + cleaned datasets (cleaned link still TODO)
 ```
 
 ## Plan / timeline (from Phase-I report, Section 4)
@@ -44,15 +48,18 @@ DataLinks.txt          Box links to raw + cleaned datasets (fill in before final
 |---|---|---|---|
 | S1 | Review/update U1 + dataset description | All | 07/15 |
 | S2 | Profile D to confirm the 4 DQ problems | Kunal (Violations), Zehra (Facility Type/City), Che-Min (License #/Results) | 07/18 |
-| S3 | Clean each problem independently | Kunal, Zehra, Che-Min; Kunal joins | 07/22 clean, 07/23 join |
-| S4 | Before/after checks, re-run Q1/Q2 on D' | Kunal, Zehra, Che-Min | 07/26 |
-| S5 | Document + quantify changes | All; Kunal compiles | 07/29 |
+| S3 | Clean each problem independently, then join | Kunal, Zehra, Che-Min; Kunal joins | done |
+| S4 | Before/after checks, re-run Q1/Q2 on D' | Kunal | done - see `notes/S4_before_after_results.md` |
+| S5 | Document + quantify changes | Kunal | done - see `notes/S5_change_summary.md` |
 
 ## Submission checklist (Phase-II)
 
-- [ ] Phase-II report PDF (workflow description, before/after IC checks, change summary, conclusions)
-- [ ] Workflow model (`workflow/`)
-- [ ] OpenRefine operation history (`openrefine/OpenRefineHistory.json`)
-- [ ] Other scripts / provenance (`scripts/`)
-- [ ] Queries (`queries/queries.txt`)
-- [ ] `DataLinks.txt` with Box links to raw + cleaned data
+- [ ] Phase-II report PDF (workflow description, before/after IC checks, change summary, conclusions) - not started
+- [x] Workflow model (`workflow/`)
+- [x] OpenRefine operation history (`openrefine/OpenRefine.json`)
+- [x] Other scripts / provenance (`scripts/`)
+- [x] Queries (`queries/queries.txt`)
+- [ ] `DataLinks.txt` with Box link to cleaned data - raw is linked, D' still needs uploading
+      from `D_prime_export/` to Box (no Box access from this tooling, needs a person to do it)
+- [ ] Confirm who did the `facility_type_city` OpenRefine work (repo history shows a "james edits"
+      commit) for the team-contributions section
