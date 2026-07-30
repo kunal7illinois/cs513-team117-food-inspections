@@ -33,7 +33,7 @@ scripts/
   join/                Kunal    - build_databases.py builds raw.db (D) + clean.db (D') from all
                                    of the above; run_before_after.py runs the before/after queries
 
-openrefine/            OpenRefine.json - operation history (115 ops, Facility Type + City)
+openrefine/            OpenRefineHistory.json - operation history (115 ops, Facility Type + City)
 queries/               queries.txt - SQL used to profile D and D' and check ICs before/after
 workflow/              Workflow_W1_outer.* (whole pipeline) and Workflow_W2_inner.* (OpenRefine steps)
 notes/                 Per-step writeups (S1 review, S2 profiling, S4 results, S5 change summary)
@@ -54,9 +54,9 @@ DataLinks.txt           Box links to raw + cleaned datasets (cleaned link still 
 
 ## Submission checklist (Phase-II)
 
-- [ ] Phase-II report PDF (workflow description, before/after IC checks, change summary, conclusions) - not started
+- [ ] Phase-II report PDF (workflow description, before/after IC checks, change summary, conclusions) - final review in progress
 - [x] Workflow model (`workflow/`)
-- [x] OpenRefine operation history (`openrefine/OpenRefine.json`)
+- [x] OpenRefine operation history (`openrefine/OpenRefineHistory.json`)
 - [x] Other scripts / provenance (`scripts/`)
 - [x] Queries (`queries/queries.txt`)
 - [x] `DataLinks.txt` with Box links to raw + cleaned data

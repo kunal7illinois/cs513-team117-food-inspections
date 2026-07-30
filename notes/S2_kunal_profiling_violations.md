@@ -38,23 +38,29 @@ This is the key profiling result for my S3 step. Method:
 2. For each (raw_code, era) pair, count how many distinct description strings
    appear, and how dominant the most common one is (purity).
 
-Result: **all 65 raw codes have exactly 2 distinct description strings site-wide**
-(one per era), and **every one of the 110 (raw_code, era) combinations that
-actually occur in the data is >=98% pure** (in practice, the top description
-accounts for effectively all occurrences in every combination tested at that
-threshold) - i.e., splitting by the 07/01/2018 boundary cleanly separates the two
-meanings of each reused code, with no meaningful bleed-over at the transition date.
+Result (re-verified directly against the raw CSV): of the 65 distinct raw codes,
+**45 appear in both eras, and every one of those 45 has a different top
+description pre- vs. post-2018** - these are the genuinely reused/collided codes.
+The other 20 codes appear in only one era (new or retired checklist items), so
+they only ever have one meaning in the data and aren't part of the collision.
+Across all 110 (raw_code, era) combinations that actually occur, **every one is
+>=98% pure** (in practice the top description accounts for effectively all
+occurrences) - i.e., splitting by the 07/01/2018 boundary cleanly separates the
+two meanings of each reused code, with no meaningful bleed-over at the transition
+date. (An earlier version of this note said "all 65 codes have exactly 2 distinct
+meanings," which is wrong - that's only true of the 45 that appear in both eras.)
 
 This directly confirms the report's Problem 4 example (code 18: rodent-proofing
-pre-2018 vs. cooking temperature post-2018) generalizes to all 65 codes, not just
-that one - and gives an empirical basis for the remap approach in S3 (era-tagging
+pre-2018 vs. cooking temperature post-2018) generalizes to the other 44 reused
+codes - and gives an empirical basis for the remap approach in S3 (era-tagging
 each code) instead of needing to track down an external, harder-to-verify city
 crosswalk document.
 
-Not every code appears in both eras - a handful are effectively new or retired:
-codes 61-64 only appear post-2018 (new checklist items), code 70 only appears
-pre-2018 (retired item, "NO SMOKING REGULATIONS"). This is expected and doesn't
-affect the remap logic.
+The 20 single-era codes include codes 61-64, which only appear post-2018 (new
+checklist items), and code 70, which only appears pre-2018 (retired item, "NO
+SMOKING REGULATIONS"). These don't need era-tagging to disambiguate (there's only
+one meaning to begin with), but they get an era suffix anyway for a consistent
+`violation_code` format across the lookup table.
 
 ## Where this feeds into S3
 

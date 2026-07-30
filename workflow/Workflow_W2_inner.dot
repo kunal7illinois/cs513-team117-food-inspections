@@ -3,7 +3,7 @@
  *
  * Inner ("W2") workflow: the OpenRefine steps behind facility_type_lookup.csv
  * and city_lookup.csv. Grouped from the 115 raw operations in
- * ../openrefine/OpenRefine.json (op counts confirmed by parsing that file
+ * ../openrefine/OpenRefineHistory.json (op counts confirmed by parsing that file
  * directly, not hand-counted) rather than generated with the OR2YW tool.
  *
  * Facility Type: 1 column-addition + 3 text-transform + 98 mass-edit (cluster merge) ops

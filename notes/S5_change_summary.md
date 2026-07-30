@@ -7,7 +7,7 @@ Full before/after query results are in `S4_before_after_results.md`.
 
 | Column | Rows touched | Breakdown |
 |---|---|---|
-| **Facility Type** | 298,869 total; 16,550 cells changed (5.54%) | 2,286 (0.76%) case/whitespace-only; 14,264 (4.77%) real reclassification (e.g. "Daycare Above and Under 2 Years" -> "Daycare", "TAVERN" -> "Liquor"). Raw: 521 distinct values -> canonical: 240 (218 actually appear in the final `establishment` table after the per-license mode collapse). |
+| **Facility Type** | 298,869 total; 16,550 cells changed (5.54%) | 2,286 (0.76%) case/whitespace-only; 14,264 (4.77%) real reclassification (e.g. "Daycare Above and Under 2 Years" -> "Daycare", "TAVERN" -> "Liquor"). Raw: 521 distinct values -> canonical: 240 (231 actually appear in the final `establishment` table after the per-license mode collapse - up from 218 before the synthetic-license-ID follow-up fix added 638 previously-orphaned inspections to the table). |
 | **City** | 298,869 total; 298,222 cells "changed" (99.78%) | Almost all of that is cosmetic: 298,105 (99.74%) is case/whitespace normalization only (`CHICAGO` -> `Chicago`). Only 117 rows (0.04%) are substantive fixes (`CCHICAGO`, `CHICAGOO`, `312CHICAGO`, etc. -> `Chicago`). Raw: 90 distinct values -> canonical: 70 (69 in `establishment`). |
 | **License #** | 787 rows had a placeholder (`0` or blank) | 89 recovered with a real license (name+address match against other inspections of the same establishment). Of the remaining 698, 638 "unresolved" rows (no other record at all) are now grouped among themselves by normalized (name, address) into 240 synthetic establishments (`SYN-000001`, ...) instead of all colliding on the literal `0` - this doesn't invent a real license, it just stops unrelated one-off venues from being merged together, and lets those inspections join to an establishment at all. Only the 60 "ambiguous" rows (multiple real candidate licenses, genuinely unclear which is right) remain unresolved/unchanged. |
 | **Results** | 298,869 rows gained a derived `outcome_bucket` field | 257,987 map 1:1 to `pass`/`fail` (no semantic change beyond lower-casing); 41,882 (14.01%) collapse from 4 distinct "didn't happen" strings (`Out of Business`, `No Entry`, `Not Ready`, `Business Not Located`) into one `no_outcome` category. |
@@ -23,7 +23,7 @@ Full before/after query results are in `S4_before_after_results.md`.
 | Distinct City spellings | 90 | 69 |
 | (facility_type, year) groups in Q1 (fragmentation) | 2,344 | 1,183 |
 | Rows with a non-outcome Results value silently included if you forget to filter | 41,882 (14.01%) | 0 (excluded via `outcome_bucket`) |
-| Q2 (violations by code) answerable at all | No (unparsed blob) | Yes (109 grouped categories) |
+| Q2 (violations by code) answerable at all | No (unparsed blob) | Yes (110 grouped categories) |
 
 Note: the 387 figure for Facility-Type inconsistency is higher than the "198 license numbers" estimate in the Phase-I report - that number was a rough eyeball estimate before full profiling; 387 is the actual measured count and is the one we should use going forward.
 

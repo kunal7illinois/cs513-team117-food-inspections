@@ -1,11 +1,11 @@
 """
 CS 513 Team 117 - Phase II, S3 join step (owner: Kunal)
 
-Builds two SQLite databases with the SAME table/column names but different
-data quality, so the exact same Q1/Q2-style SQL can be pointed at either one
-to show a direct before/after comparison (this is the approach our Phase-I
-plan committed to - see notes there re: "Q1 and Q2 ... run unmodified against
-both D and D'").
+Builds two SQLite databases from one reproducible build process, so that
+paired before/after queries can express the same analytical question against
+each one. The schemas are NOT identical (see below) - D is one flat table, D'
+is normalized - so Q1/Q2-style queries are two queries (one per schema), not
+one query pointed at both. See queries/queries.txt for the paired versions.
 
   raw.db   - D:  one flat table (`inspection_raw`), a straight load of the
              original CSV with no cleaning applied at all. Violations stays

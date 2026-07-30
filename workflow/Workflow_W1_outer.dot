@@ -26,7 +26,7 @@ digraph Team117OuterWorkflow {
     node [shape=box, style="rounded,filled", fillcolor="#F5F5F5", color="#999999"];
     raw_csv [label="Food-Inspections-20251023.csv\n(D, 298,869 rows)"];
     vfind [label="violation_finding_clean.csv\n+ violation_code_lookup.csv"];
-    ftype_city [label="facility_type_lookup.csv\n+ city_lookup.csv\n+ OpenRefine.json"];
+    ftype_city [label="facility_type_lookup.csv\n+ city_lookup.csv\n+ OpenRefineHistory.json"];
     lic_results [label="license_fix.csv\n+ results_bucketed.csv"];
     raw_db [label="raw.db (D)"];
     clean_db [label="clean.db (D')\nestablishment / inspection /\nviolation_finding / violation_code"];

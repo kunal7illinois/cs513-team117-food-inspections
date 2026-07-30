@@ -3,7 +3,7 @@
 OpenRefine clustering to canonicalize the raw `Facility Type` (521 distinct raw
 values -> 240 canonical) and `City` (90 distinct raw values -> 70 canonical)
 columns (Phase-I report, Problems 1 and 2). OpenRefine operation history is at
-`../../openrefine/OpenRefine.json`.
+`../../openrefine/OpenRefineHistory.json`.
 
 ## Files
 

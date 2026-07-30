@@ -6,7 +6,7 @@
   summary (S5).
 - **`Workflow_W2_inner.dot`** / `.png` / `.pdf` - the inner OpenRefine
   workflow behind `facility_type_lookup.csv` and `city_lookup.csv`, grouped
-  from the 115 raw operations in `../openrefine/OpenRefine.json` into stages
+  from the 115 raw operations in `../openrefine/OpenRefineHistory.json` into stages
   (add column -> text-transform -> cluster/mass-edit -> export -> dedupe).
 
 The single-diagram versions above are wide (long left-to-right chains), which

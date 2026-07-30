@@ -1,7 +1,10 @@
 CS 513 Team 117 - Chicago Food Inspections
 Profiling and integrity-constraint queries, run against raw.db (D) and clean.db (D'),
-both built by scripts/join/build_databases.py (same table names/shapes in each DB
-where applicable; D is one flat table, D' is normalized per the Phase-I ER diagram).
+both built by scripts/join/build_databases.py from one reproducible build process.
+D is one flat table (inspection_raw); D' is normalized per the Phase-I ER diagram
+(establishment / inspection / violation_finding / violation_code) - the schemas are
+not identical, so each pair below is two queries that express the same analytical
+question against the appropriate schema in each database, not one shared query.
 Actual result values for every query below are captured in notes/S4_before_after_results.md.
 
 ================================================================================
@@ -108,10 +111,48 @@ GROUP BY results;
 
 -- D': same rows, now explicitly bucketed so U1 queries can filter them out
 -- with outcome_bucket = 'no_outcome' instead of relying on remembering all
--- four raw string values.
-SELECT raw_result, outcome_bucket, n_occurrences FROM (
-    SELECT raw_result, outcome_bucket, COUNT(*) AS n_occurrences
-    FROM (SELECT results AS raw_result, results AS outcome_bucket FROM inspection_raw)
-    GROUP BY raw_result
-);
--- (in practice we read this straight from results_bucketed.csv - see that file)
+-- four raw string values. Queries the actual clean.db inspection table (the
+-- earlier version of this query aliased raw_result to itself from
+-- inspection_raw and didn't touch outcome_bucket at all - fixed).
+SELECT raw_result, outcome_bucket, COUNT(*) AS n_occurrences
+FROM inspection
+GROUP BY raw_result, outcome_bucket
+ORDER BY raw_result, outcome_bucket;
+
+-- D': every cleaned row must land in a valid bucket (completeness check)
+SELECT COUNT(*) AS violations
+FROM inspection
+WHERE outcome_bucket NOT IN ('pass', 'fail', 'no_outcome')
+   OR outcome_bucket IS NULL;
+
+-- D': the four "didn't happen" raw statuses must map only to no_outcome,
+-- and Fail/Pass/Pass w/ Conditions must map to fail/pass (mapping-consistency check)
+SELECT COUNT(*) AS violations
+FROM inspection
+WHERE (raw_result IN ('Out of Business', 'No Entry', 'Not Ready', 'Business Not Located')
+       AND outcome_bucket <> 'no_outcome')
+   OR (raw_result = 'Fail' AND outcome_bucket <> 'fail')
+   OR (raw_result IN ('Pass', 'Pass w/ Conditions') AND outcome_bucket <> 'pass');
+
+================================================================================
+IC5 - Referential integrity (no orphan rows after the join)
+================================================================================
+-- D': every non-ambiguous inspection must join to an establishment
+-- (the 60 'ambiguous' rows are intentionally excluded - see notes/S5_change_summary.md)
+SELECT COUNT(*) AS violations
+FROM inspection i
+LEFT JOIN establishment e ON e.license_no = i.license_no
+WHERE e.license_no IS NULL
+  AND i.license_fix_status <> 'ambiguous';
+
+-- D': every violation_finding row must reference a real inspection
+SELECT COUNT(*) AS violations
+FROM violation_finding vf
+LEFT JOIN inspection i ON i.inspection_id = vf.inspection_id
+WHERE i.inspection_id IS NULL;
+
+-- D': every violation_finding row must reference a defined violation_code
+SELECT COUNT(*) AS violations
+FROM violation_finding vf
+LEFT JOIN violation_code vc ON vc.violation_code = vf.violation_code
+WHERE vc.violation_code IS NULL;
