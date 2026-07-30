@@ -1,0 +1,36 @@
+/*
+ * Workflow_W1_outer_part2b.dot
+ * Outer ("W1") workflow, Part 3 of 3: S5 change summary through the final
+ * Phase-II report. Continued from Part 2.
+ *
+ * Render with:
+ *   dot -Tpng -Gdpi=200 Workflow_W1_outer_part2b.dot -o Workflow_W1_outer_part2b.png
+ *   dot -Tpdf Workflow_W1_outer_part2b.dot -o Workflow_W1_outer_part2b.pdf
+ */
+
+digraph Team117OuterWorkflowPart2b {
+    rankdir=LR;
+    fontname="Helvetica";
+    node [fontname="Helvetica", fontsize=15];
+    edge [fontname="Helvetica", fontsize=12, color="#555555"];
+    ranksep=0.6; nodesep=0.4;
+    label="Outer Workflow (W1) - Part 3 of 3: Change Summary -> Report";
+    labelloc=t; fontsize=18; fontname="Helvetica-Bold";
+
+    node [shape=box, style="dashed,filled", fillcolor="#FFFFFF", color="#999999", penwidth=1.0];
+    cont_in [label="continued from Part 2:\nbefore_after results\n(+ D_prime_export, Part 2)"];
+
+    node [shape=box, style="rounded,filled", fillcolor="#F5F5F5", color="#999999"];
+    change_summary [label="S5_change_summary.md\n(also uses S3 output\ncell counts - see Part 1)"];
+    report [label="Phase-II report (PDF)\n+ supplementary ZIP"];
+
+    node [shape=box, style="rounded,filled", fillcolor="#EAF2FB", color="#2E5C8A", penwidth=1.4];
+    summarize [label="S5 change summary"];
+    write_report [label="Phase-II report"];
+
+    cont_in -> summarize [style=dashed];
+    summarize -> change_summary;
+    change_summary -> write_report;
+    cont_in -> write_report [style=dashed, label="D_prime_export"];
+    write_report -> report;
+}

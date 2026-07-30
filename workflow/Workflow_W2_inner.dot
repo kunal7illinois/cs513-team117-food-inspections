@@ -47,7 +47,7 @@ digraph OpenRefineInnerWorkflow {
     }
 
     export [label="Export project\n(row-level, 298,869 rows)"];
-    dedupe [label="dedupe_lookup_tables.py\n(Kunal, post-hoc)\nreshape to one row per\ndistinct raw value + QA fix"];
+    dedupe [label="dedupe_lookup_tables.py\nreshape to one row per\ndistinct raw value + QA fix"];
 
     raw_col_ft -> add_ft;
     raw_col_city -> add_city;

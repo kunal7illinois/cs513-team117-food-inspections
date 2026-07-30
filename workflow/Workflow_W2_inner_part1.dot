@@ -1,0 +1,50 @@
+/*
+ * Workflow_W2_inner_part1.dot
+ * Inner ("W2") workflow, Part 1 of 2: the OpenRefine clustering operations
+ * for Facility Type and City (parallel lanes). Continues in
+ * Workflow_W2_inner_part2.dot (export + post-hoc reshape).
+ *
+ * Render with:
+ *   dot -Tpng -Gdpi=200 Workflow_W2_inner_part1.dot -o Workflow_W2_inner_part1.png
+ *   dot -Tpdf Workflow_W2_inner_part1.dot -o Workflow_W2_inner_part1.pdf
+ */
+
+digraph OpenRefineInnerWorkflowPart1 {
+    rankdir=LR;
+    fontname="Helvetica";
+    node [fontname="Helvetica", fontsize=15];
+    edge [fontname="Helvetica", fontsize=12, color="#555555"];
+    ranksep=0.6; nodesep=0.4;
+    label="Inner Workflow (W2) - Part 1 of 2: OpenRefine Clustering";
+    labelloc=t; fontsize=18; fontname="Helvetica-Bold";
+
+    node [shape=box, style="rounded,filled", fillcolor="#F5F5F5", color="#999999"];
+    raw_col_ft [label="Facility Type\n(521 distinct raw values)"];
+    raw_col_city [label="City\n(90 distinct raw values)"];
+
+    node [shape=box, style="rounded,filled", fillcolor="#EAF2FB", color="#2E5C8A", penwidth=1.4];
+    subgraph cluster_ft {
+        label="Facility Type lane";
+        style="dashed"; color="#B98900"; fontsize=13;
+        add_ft [label="core/column-addition\ncreate 'Canonicalized Facility Type'"];
+        tt_ft [label="core/text-transform x3\ntoTitlecase() . trim() .\ncollapse whitespace"];
+        cluster_ft_op [label="core/mass-edit x98\ncluster & merge\n(key collision / nearest-neighbor)"];
+        add_ft -> tt_ft -> cluster_ft_op;
+    }
+    subgraph cluster_city {
+        label="City lane";
+        style="dashed"; color="#B98900"; fontsize=13;
+        add_city [label="core/column-addition + rename\ncreate 'Canonicalized City'"];
+        tt_city [label="core/text-transform x3\ntoTitlecase() . trim() .\ncollapse whitespace"];
+        cluster_city_op [label="core/mass-edit x8\ncluster & merge"];
+        add_city -> tt_city -> cluster_city_op;
+    }
+
+    node [shape=box, style="dashed,filled", fillcolor="#FFFFFF", color="#999999", penwidth=1.0];
+    cont_out [label="continued in Part 2:\n-> Export project"];
+
+    raw_col_ft -> add_ft;
+    raw_col_city -> add_city;
+    cluster_ft_op -> cont_out [style=dashed];
+    cluster_city_op -> cont_out [style=dashed];
+}

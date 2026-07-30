@@ -1,0 +1,36 @@
+/*
+ * Workflow_W2_inner_part2.dot
+ * Inner ("W2") workflow, Part 2 of 2: exporting the OpenRefine project and
+ * the post-hoc reshape into lookup tables. Continued from
+ * Workflow_W2_inner_part1.dot.
+ *
+ * Render with:
+ *   dot -Tpng -Gdpi=200 Workflow_W2_inner_part2.dot -o Workflow_W2_inner_part2.png
+ *   dot -Tpdf Workflow_W2_inner_part2.dot -o Workflow_W2_inner_part2.pdf
+ */
+
+digraph OpenRefineInnerWorkflowPart2 {
+    rankdir=LR;
+    fontname="Helvetica";
+    node [fontname="Helvetica", fontsize=15];
+    edge [fontname="Helvetica", fontsize=12, color="#555555"];
+    ranksep=0.6; nodesep=0.4;
+    label="Inner Workflow (W2) - Part 2 of 2: Export -> Reshape";
+    labelloc=t; fontsize=18; fontname="Helvetica-Bold";
+
+    node [shape=box, style="dashed,filled", fillcolor="#FFFFFF", color="#999999", penwidth=1.0];
+    cont_in [label="continued from Part 1:\nOpenRefine clustering\n(both lanes)"];
+
+    node [shape=box, style="rounded,filled", fillcolor="#F5F5F5", color="#999999"];
+    export [label="Export project\n(row-level, 298,869 rows)"];
+    out_ft [label="Canonicalized Facility Type\n(240 distinct values)"];
+    out_city [label="Canonicalized City\n(70 distinct values, 2 hand-\ncorrected post-export - see\nfacility_type_city/README.md)"];
+
+    node [shape=box, style="rounded,filled", fillcolor="#EAF2FB", color="#2E5C8A", penwidth=1.4];
+    dedupe [label="dedupe_lookup_tables.py\nreshape to one row per\ndistinct raw value + QA fix"];
+
+    cont_in -> export [style=dashed];
+    export -> dedupe;
+    dedupe -> out_ft;
+    dedupe -> out_city;
+}

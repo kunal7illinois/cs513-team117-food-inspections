@@ -1,0 +1,57 @@
+/*
+ * Workflow_W1_outer_part1.dot
+ * Outer ("W1") workflow, Part 1 of 2: raw CSV through the three independent
+ * S3 cleaning workstreams into the join step (build_databases.py).
+ * Continues in Workflow_W1_outer_part2.dot (build_databases.py's raw.db /
+ * clean.db outputs feed directly into Part 2's validation + reporting steps).
+ *
+ * Split into two parts purely for print legibility (the single-diagram
+ * version is very wide); the underlying pipeline is unchanged - see
+ * Workflow_W1_outer.dot for the original single-file version.
+ *
+ * Render with:
+ *   dot -Tpng -Gdpi=200 Workflow_W1_outer_part1.dot -o Workflow_W1_outer_part1.png
+ *   dot -Tpdf Workflow_W1_outer_part1.dot -o Workflow_W1_outer_part1.pdf
+ */
+
+digraph Team117OuterWorkflowPart1 {
+    rankdir=LR;
+    fontname="Helvetica";
+    node [fontname="Helvetica", fontsize=15];
+    edge [fontname="Helvetica", fontsize=12, color="#555555"];
+    ranksep=0.6; nodesep=0.35;
+    compound=true;
+    label="Outer Workflow (W1) - Part 1 of 2: Independent Cleaning -> Join";
+    labelloc=t; fontsize=18; fontname="Helvetica-Bold";
+
+    node [shape=box, style="rounded,filled", fillcolor="#F5F5F5", color="#999999"];
+    raw_csv [label="Food-Inspections-20251023.csv\n(D, 298,869 rows)"];
+    vfind [label="violation_finding_clean.csv\n+ violation_code_lookup.csv"];
+    ftype_city [label="facility_type_lookup.csv\n+ city_lookup.csv\n+ OpenRefine.json"];
+    lic_results [label="license_fix.csv\n+ results_bucketed.csv"];
+
+    node [shape=box, style="rounded,filled", fillcolor="#EAF2FB", color="#2E5C8A", penwidth=1.4];
+    subgraph cluster_s3 {
+        label="S3 - clean (parallel, independent - each reads only raw_csv)";
+        style="dashed"; color="#B98900"; fontname="Helvetica"; fontsize=13;
+        parse_violations [label="parse_violations.py\nparse + era-remap 07/01/2018"];
+        openrefine [label="OpenRefine clustering\nFacility Type + City"];
+        clean_license [label="clean_license_results.py\nLicense #=0 fix + Results bucket"];
+    }
+    build_db [label="build_databases.py"];
+
+    node [shape=box, style="dashed,filled", fillcolor="#FFFFFF", color="#999999", penwidth=1.0];
+    cont_out [label="continued in Part 2:\n-> raw.db (D) / clean.db (D')"];
+
+    raw_csv -> parse_violations;
+    raw_csv -> openrefine;
+    raw_csv -> clean_license;
+    parse_violations -> vfind;
+    openrefine -> ftype_city;
+    clean_license -> lic_results;
+    raw_csv -> build_db;
+    vfind -> build_db;
+    ftype_city -> build_db;
+    lic_results -> build_db;
+    build_db -> cont_out [style=dashed];
+}

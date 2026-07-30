@@ -1,0 +1,42 @@
+/*
+ * Workflow_W1_outer_part2a.dot
+ * Outer ("W1") workflow, Part 2 of 3: join outputs through the before/after
+ * validation queries. Continued from Part 1; continues in Part 3.
+ *
+ * Render with:
+ *   dot -Tpng -Gdpi=200 Workflow_W1_outer_part2a.dot -o Workflow_W1_outer_part2a.png
+ *   dot -Tpdf Workflow_W1_outer_part2a.dot -o Workflow_W1_outer_part2a.pdf
+ */
+
+digraph Team117OuterWorkflowPart2a {
+    rankdir=LR;
+    fontname="Helvetica";
+    node [fontname="Helvetica", fontsize=15];
+    edge [fontname="Helvetica", fontsize=12, color="#555555"];
+    ranksep=0.6; nodesep=0.4;
+    label="Outer Workflow (W1) - Part 2 of 3: Join Outputs -> Before/After Queries";
+    labelloc=t; fontsize=18; fontname="Helvetica-Bold";
+
+    node [shape=box, style="dashed,filled", fillcolor="#FFFFFF", color="#999999", penwidth=1.0];
+    cont_in [label="continued from Part 1:\nbuild_databases.py"];
+
+    node [shape=box, style="rounded,filled", fillcolor="#F5F5F5", color="#999999"];
+    raw_db [label="raw.db (D)"];
+    clean_db [label="clean.db (D')\nestablishment / inspection /\nviolation_finding / violation_code"];
+    dprime_export [label="D_prime_export/*.csv\n-> Box (DataLinks.txt)\n(feeds report - Part 3)"];
+    before_after [label="S4_before_after_results.md\n(Q1, Q2, IC checks)"];
+
+    node [shape=box, style="rounded,filled", fillcolor="#EAF2FB", color="#2E5C8A", penwidth=1.4];
+    run_queries [label="run_before_after.py"];
+
+    node [shape=box, style="dashed,filled", fillcolor="#FFFFFF", color="#999999", penwidth=1.0];
+    cont_out [label="continued in Part 3:\n-> S5 change summary"];
+
+    cont_in -> raw_db [style=dashed];
+    cont_in -> clean_db [style=dashed];
+    clean_db -> dprime_export;
+    raw_db -> run_queries;
+    clean_db -> run_queries;
+    run_queries -> before_after;
+    before_after -> cont_out [style=dashed];
+}

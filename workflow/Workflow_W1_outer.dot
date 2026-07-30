@@ -41,15 +41,15 @@ digraph Team117OuterWorkflow {
     subgraph cluster_s3 {
         label="S3 - clean (parallel, independent - each reads only raw_csv)";
         style="dashed"; color="#B98900"; fontname="Helvetica"; fontsize=10;
-        parse_violations [label="parse_violations.py\n(Kunal)\nparse + era-remap 07/01/2018"];
-        openrefine [label="OpenRefine clustering\n(Zehra)\nFacility Type + City"];
-        clean_license [label="clean_license_results.py\n(Che-Min)\nLicense #=0 fix + Results bucket"];
+        parse_violations [label="parse_violations.py\nparse + era-remap 07/01/2018"];
+        openrefine [label="OpenRefine clustering\nFacility Type + City"];
+        clean_license [label="clean_license_results.py\nLicense #=0 fix + Results bucket"];
     }
 
-    build_db [label="build_databases.py\n(Kunal - S3 join)"];
-    run_queries [label="run_before_after.py\n(Kunal - S4)"];
-    summarize [label="S5 change summary\n(Kunal, compiling all)"];
-    write_report [label="Phase-II report\n(All)"];
+    build_db [label="build_databases.py"];
+    run_queries [label="run_before_after.py"];
+    summarize [label="S5 change summary"];
+    write_report [label="Phase-II report"];
 
     // Edges
     raw_csv -> parse_violations;
